@@ -2,7 +2,7 @@ package com.zackwantsfriends;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
-abstract class Component {
+public abstract class Component {
 
     private GameObject gameObject;
     private boolean active;
@@ -45,7 +45,7 @@ abstract class Component {
 
     /**
      * Initializes the component.
-     * Use this function to get other components from the gameobject.
+     * Use this method to get other components from the gameobject.
      */
     public void initialize() {
     }

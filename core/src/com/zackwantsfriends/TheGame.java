@@ -5,12 +5,11 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.sun.java.accessibility.util.java.awt.TextComponentTranslator;
 import com.zackwantsfriends.components.TestComponent;
 
 public class TheGame extends ApplicationAdapter {
-    SpriteBatch batch;
-    Texture img;
+    private SpriteBatch batch;
+    private Texture img;
 
     @Override
     public void create() {
@@ -21,9 +20,9 @@ public class TheGame extends ApplicationAdapter {
         player.addComponent(new TestComponent());
 
         TestComponent cmp = player.getComponent(TestComponent.class);
-        cmp.Health = 20;
+        cmp.health = 20;
 
-        System.out.println(cmp.Health);
+        System.out.println(cmp.health);
     }
 
     @Override

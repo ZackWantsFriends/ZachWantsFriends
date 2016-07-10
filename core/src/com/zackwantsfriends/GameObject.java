@@ -1,33 +1,21 @@
 package com.zackwantsfriends;
 
-import com.badlogic.gdx.assets.loaders.resolvers.ClasspathFileHandleResolver;
 import com.badlogic.gdx.math.Vector2;
-import com.zackwantsfriends.components.TestComponent;
 
-import java.util.Dictionary;
 import java.util.HashMap;
-import java.util.Hashtable;
-import java.util.Map;
 
-/**
- * Created by Christian on 10.07.2016.
- */
 public class GameObject {
+    private static int nextId = 0;
 
     private int id;
     private String name;
     private Vector2 position;
     private float rotation;
 
-    private HashMap<Class, Component> componentMap = new HashMap<Class, Component>();
-
-    // set to -1 because the first gameobject
-    // will have the id 0.
-    private static int nextId = -1;
+    private HashMap<Class, Component> componentMap = new HashMap<>();
 
     public GameObject() {
-        nextId++;
-        this.id = nextId;
+        this.id = nextId++;
         this.name = "GameObject" + id;
     }
 
@@ -77,7 +65,7 @@ public class GameObject {
     /**
      * Gets all components of the gameobject.
      *
-     * @return
+     * @return Returns all components
      */
     public Component[] getComponents() {
         return (Component[]) componentMap.values().toArray();
@@ -85,6 +73,7 @@ public class GameObject {
 
     /**
      * Adds a component to the gameobject.
+     *
      * @param component The type of the component.
      */
     public void addComponent(Component component) {
@@ -92,15 +81,15 @@ public class GameObject {
     }
 
     /**
-     * Gets a component by his class.
+     * Gets a component by its class.
+     *
      * @param componentClass The class of the component.
-     * @param <T> The componenttype.
+     * @param <T>            The componenttype.
      * @return Returns the component.
      */
     public <T> T getComponent(Class<T> componentClass) {
         if (componentMap.containsKey(componentClass)) {
-            T result = (T) componentMap.get(componentClass);
-            return result;
+            return componentClass.cast(componentMap.get(componentClass));
         }
         return null;
     }
