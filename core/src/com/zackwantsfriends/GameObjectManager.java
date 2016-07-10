@@ -6,9 +6,10 @@ public class GameObjectManager {
 
     //TODO: GameObject events (added, removed)
 
-    private HashMap<Integer, GameObject> gameObjectMap = new HashMap<>();
+    private HashMap<Integer, GameObject> gameObjectMap;
 
     public GameObjectManager() {
+        gameObjectMap = new HashMap<>();
     }
 
     /**
