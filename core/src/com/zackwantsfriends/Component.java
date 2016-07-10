@@ -54,9 +54,9 @@ public abstract class Component {
      * Renders the component.
      *
      * @param batch The spritebatch.
-     * @param delta The deltatime.
+     * @param deltaTime The deltatime.
      */
-    public void render(SpriteBatch batch, float delta) {
+    public void render(SpriteBatch batch, float deltaTime) {
 
     }
 
