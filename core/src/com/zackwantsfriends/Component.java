@@ -1,5 +1,7 @@
 package com.zackwantsfriends;
 
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+
 /**
  * Created by Christian on 10.07.2016.
  */
@@ -46,12 +48,11 @@ public abstract class Component {
     }
 
     /**
-     * renders the component.
-     *
+     * Renders the component.
+     * @param batch The spritebatch.
      * @param delta The deltatime.
      */
-    public void render(float delta) {
-
+    public void render(SpriteBatch batch, float delta) {
     }
 
 }
