@@ -2,6 +2,7 @@ package com.zackwantsfriends;
 
 import com.badlogic.gdx.assets.loaders.resolvers.ClasspathFileHandleResolver;
 import com.badlogic.gdx.math.Vector2;
+import com.zackwantsfriends.components.TestComponent;
 
 import java.util.Dictionary;
 import java.util.HashMap;
@@ -73,19 +74,46 @@ public class GameObject {
         this.rotation = rotation;
     }
 
+    /**
+     * Gets all components of the gameobject.
+     *
+     * @return
+     */
     public Component[] getComponents() {
         return (Component[]) componentMap.values().toArray();
     }
 
+    /**
+     * Adds a component to the gameobject.
+     * @param component The type of the component.
+     */
     public void addComponent(Component component) {
         componentMap.put(component.getClass(), component);
     }
 
+    /**
+     * Gets a component by his class.
+     * @param componentClass The class of the component.
+     * @param <T> The componenttype.
+     * @return Returns the component.
+     */
     public <T> T getComponent(Class<T> componentClass) {
         if (componentMap.containsKey(componentClass)) {
             T result = (T) componentMap.get(componentClass);
             return result;
         }
         return null;
+    }
+
+    /**
+     * Removes a component from the gameobject.
+     *
+     * @param componentClass The class of the component.
+     * @param <T>            The type of the component.
+     */
+    public <T> void removeComponent(Class<T> componentClass) {
+        if (componentMap.containsKey(componentClass)) {
+            componentMap.remove(componentClass);
+        }
     }
 }
