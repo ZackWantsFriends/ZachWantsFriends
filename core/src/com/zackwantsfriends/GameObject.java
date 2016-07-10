@@ -1,9 +1,12 @@
 package com.zackwantsfriends;
 
+import com.badlogic.gdx.assets.loaders.resolvers.ClasspathFileHandleResolver;
 import com.badlogic.gdx.math.Vector2;
 
 import java.util.Dictionary;
+import java.util.HashMap;
 import java.util.Hashtable;
+import java.util.Map;
 
 /**
  * Created by Christian on 10.07.2016.
@@ -15,7 +18,7 @@ public class GameObject {
     private Vector2 position;
     private float rotation;
 
-    private Dictionary<Class<Component>, Component> componentList = new Hashtable<Class<Component>, Component>();
+    private HashMap<Class, Component> componentMap = new HashMap<Class, Component>();
 
     // set to -1 because the first gameobject
     // will have the id 0.
@@ -70,11 +73,19 @@ public class GameObject {
         this.rotation = rotation;
     }
 
-    public void addComponent(Component component) {
-        if (componentList.get(component) == null) {
-            component.setGameObject(this);
-            componentList.put((Class<Component>) component.getClass(), component);
-        }
+    public Component[] getComponents() {
+        return (Component[]) componentMap.values().toArray();
     }
 
+    public void addComponent(Component component) {
+        componentMap.put(component.getClass(), component);
+    }
+
+    public <T> T getComponent(Class<T> componentClass) {
+        if (componentMap.containsKey(componentClass)) {
+            T result = (T) componentMap.get(componentClass);
+            return result;
+        }
+        return null;
+    }
 }
