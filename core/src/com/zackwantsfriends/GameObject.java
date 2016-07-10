@@ -1,23 +1,34 @@
 package com.zackwantsfriends;
 
+import com.badlogic.gdx.assets.loaders.resolvers.ClasspathFileHandleResolver;
 import com.badlogic.gdx.math.Vector2;
+import com.zackwantsfriends.components.TestComponent;
 
+import java.util.Dictionary;
 import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.Map;
 
-class GameObject {
-    private static int nextId = 0;
+/**
+ * Created by Christian on 10.07.2016.
+ */
+public class GameObject {
+
     private int id;
     private String name;
     private Vector2 position;
     private float rotation;
-    private Map<Class<? extends Component>, Component> componentList;
+
+    private HashMap<Class, Component> componentMap = new HashMap<Class, Component>();
+
+    // set to -1 because the first gameobject
+    // will have the id 0.
+    private static int nextId = -1;
 
     public GameObject() {
-        this.id = nextId++;
+        nextId++;
+        this.id = nextId;
         this.name = "GameObject" + id;
-        position = new Vector2();
-        componentList = new HashMap<>();
     }
 
     /**
@@ -47,49 +58,62 @@ class GameObject {
         this.name = name;
     }
 
-    /**
-     * @return Returns position of GameObject
-     */
     public Vector2 getPosition() {
         return position;
     }
 
-    /**
-     * @param position New position
-     */
     public void setPosition(Vector2 position) {
         this.position = position;
     }
 
-    /**
-     * @return rotation
-     */
     public float getRotation() {
         return rotation;
     }
 
-    /**
-     * @param rotation new rotation
-     */
     public void setRotation(float rotation) {
         this.rotation = rotation;
     }
 
     /**
-     * @param component component to add
+     * Gets all components of the gameobject.
+     *
+     * @return
      */
-    public void addComponent(Component component) {
-        if (!componentList.containsValue(component)) {
-            component.setGameObject(this);
-            componentList.put(component.getClass(), component);
-        }
+    public Component[] getComponents() {
+        return (Component[]) componentMap.values().toArray();
     }
 
-    public <T extends Component> T getComponent(Class<T> componentClass) {
-        if (componentList.containsKey(componentClass)) {
-            return componentClass.cast(componentList.get(componentClass));
+    /**
+     * Adds a component to the gameobject.
+     * @param component The type of the component.
+     */
+    public void addComponent(Component component) {
+        componentMap.put(component.getClass(), component);
+    }
+
+    /**
+     * Gets a component by his class.
+     * @param componentClass The class of the component.
+     * @param <T> The componenttype.
+     * @return Returns the component.
+     */
+    public <T> T getComponent(Class<T> componentClass) {
+        if (componentMap.containsKey(componentClass)) {
+            T result = (T) componentMap.get(componentClass);
+            return result;
         }
         return null;
     }
 
+    /**
+     * Removes a component from the gameobject.
+     *
+     * @param componentClass The class of the component.
+     * @param <T>            The type of the component.
+     */
+    public <T> void removeComponent(Class<T> componentClass) {
+        if (componentMap.containsKey(componentClass)) {
+            componentMap.remove(componentClass);
+        }
+    }
 }

@@ -44,6 +44,13 @@ abstract class Component {
     }
 
     /**
+     * Initializes the component.
+     * Use this function to get other components from the gameobject.
+     */
+    public void initialize() {
+    }
+
+    /**
      * Renders the component.
      *
      * @param batch The spritebatch.
