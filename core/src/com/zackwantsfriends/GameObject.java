@@ -2,29 +2,22 @@ package com.zackwantsfriends;
 
 import com.badlogic.gdx.math.Vector2;
 
-import java.util.Dictionary;
-import java.util.Hashtable;
+import java.util.HashMap;
+import java.util.Map;
 
-/**
- * Created by Christian on 10.07.2016.
- */
-public class GameObject {
-
+class GameObject {
+    private static int nextId = 0;
     private int id;
     private String name;
     private Vector2 position;
     private float rotation;
-
-    private Dictionary<Class<Component>, Component> componentList = new Hashtable<Class<Component>, Component>();
-
-    // set to -1 because the first gameobject
-    // will have the id 0.
-    private static int nextId = -1;
+    private Map<Class<? extends Component>, Component> componentList;
 
     public GameObject() {
-        nextId++;
-        this.id = nextId;
+        this.id = nextId++;
         this.name = "GameObject" + id;
+        position = new Vector2();
+        componentList = new HashMap<>();
     }
 
     /**
@@ -54,27 +47,49 @@ public class GameObject {
         this.name = name;
     }
 
+    /**
+     * @return Returns position of GameObject
+     */
     public Vector2 getPosition() {
         return position;
     }
 
+    /**
+     * @param position New position
+     */
     public void setPosition(Vector2 position) {
         this.position = position;
     }
 
+    /**
+     * @return rotation
+     */
     public float getRotation() {
         return rotation;
     }
 
+    /**
+     * @param rotation new rotation
+     */
     public void setRotation(float rotation) {
         this.rotation = rotation;
     }
 
+    /**
+     * @param component component to add
+     */
     public void addComponent(Component component) {
-        if (componentList.get(component) == null) {
+        if (!componentList.containsValue(component)) {
             component.setGameObject(this);
-            componentList.put((Class<Component>) component.getClass(), component);
+            componentList.put(component.getClass(), component);
         }
+    }
+
+    public <T extends Component> T getComponent(Class<T> componentClass) {
+        if (componentList.containsKey(componentClass)) {
+            return componentClass.cast(componentList.get(componentClass));
+        }
+        return null;
     }
 
 }
