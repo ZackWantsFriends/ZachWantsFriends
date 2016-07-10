@@ -13,6 +13,15 @@ public class GameObjectManager {
     }
 
     /**
+     * Gets all gameobjects in the gameobjectmanager.
+     *
+     * @return Returns all gameobjects.
+     */
+    public GameObject[] getGameObjects() {
+        return (GameObject[]) gameObjectMap.values().toArray();
+    }
+
+    /**
      * Adds a gameobject to the gameobjectmanager.
      *
      * @param gameObject The gameobject.
