@@ -2,6 +2,9 @@ package com.zackwantsfriends;
 
 import com.badlogic.gdx.math.Vector2;
 
+import java.util.Dictionary;
+import java.util.Hashtable;
+
 /**
  * Created by Christian on 10.07.2016.
  */
@@ -11,6 +14,8 @@ public class GameObject {
     private String name;
     private Vector2 position;
     private float rotation;
+
+    private Dictionary<Class<Component>, Component> componentList = new Hashtable<Class<Component>, Component>();
 
     // set to -1 because the first gameobject
     // will have the id 0.
@@ -64,4 +69,12 @@ public class GameObject {
     public void setRotation(float rotation) {
         this.rotation = rotation;
     }
+
+    public void addComponent(Component component) {
+        if (componentList.get(component) == null) {
+            component.setGameObject(this);
+            componentList.put((Class<Component>) component.getClass(), component);
+        }
+    }
+
 }
