@@ -64,6 +64,7 @@ public class AbstractGameObject extends Actor {
     public void addComponent(AbstractComponent component) {
         componentMap.put(component.getClass(), component);
         component.setGameObject(this);
+        addListener(component);
     }
 
     /**

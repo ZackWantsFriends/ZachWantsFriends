@@ -1,9 +1,10 @@
 package com.zackwantsfriends.components;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.zackwantsfriends.gameobjects.AbstractGameObject;
 
-public abstract class AbstractComponent {
+public abstract class AbstractComponent extends InputListener {
 
     private AbstractGameObject gameObject;
     private boolean active;
