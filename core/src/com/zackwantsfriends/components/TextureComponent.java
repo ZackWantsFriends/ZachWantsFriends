@@ -23,7 +23,7 @@ public class TextureComponent extends Component {
     @Override
     public void render(Batch batch) {
         if (texture == null) return;
-        batch.draw(texture, getGameObject().getX(), getGameObject().getY());
+        batch.draw(texture, getGameObject().getX(), getGameObject().getY(), texture.getWidth(), texture.getHeight());
         super.render(batch);
     }
 }
