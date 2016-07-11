@@ -12,8 +12,6 @@ public class GameObject extends Actor {
 
     private int id;
     private String name;
-    private Vector2 position;
-    private float rotation;
 
     private HashMap<Class, Component> componentMap = new HashMap<>();
 
@@ -47,22 +45,6 @@ public class GameObject extends Actor {
      */
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Vector2 getPosition() {
-        return position;
-    }
-
-    public void setPosition(Vector2 position) {
-        this.position = position;
-    }
-
-    public float getRotation() {
-        return rotation;
-    }
-
-    public void setRotation(float rotation) {
-        this.rotation = rotation;
     }
 
     /**
