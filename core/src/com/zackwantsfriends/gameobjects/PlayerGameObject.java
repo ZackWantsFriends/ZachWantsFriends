@@ -6,7 +6,10 @@ import com.zackwantsfriends.components.TextureComponent;
 public class PlayerGameObject extends AbstractGameObject {
     public PlayerGameObject() {
         super();
-        TextureComponent textureComponent = new TextureComponent("player_test2.png", 14, 32);
+        // Create a new Texture component using the spritesheet "zombie.png"
+        // Each tile is 32x32
+        // We want it to animate, and change frames after 0.3 seconds
+        TextureComponent textureComponent = new TextureComponent("zombie.png", 32, 32, true, 0.3f);
         addComponent(textureComponent);
         addComponent(new TestComponent());
     }

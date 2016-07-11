@@ -11,11 +11,12 @@ public class TestComponent extends AbstractComponent {
 
     @Override
     public void update(float deltaTime) {
-        if (health > 0) {
+        if (health > 0) {   // if player has health, move left 1 px
             this.getGameObject().moveBy(1f, 0);
             health--;
-        } else {
+        } else {            // if player reaches 0 health, die
             getGameObject().setRotation(90f);
+            textureComponent.setAnimate(false);
         }
     }
 }
