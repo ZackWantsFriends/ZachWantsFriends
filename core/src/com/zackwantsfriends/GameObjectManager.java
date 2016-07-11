@@ -31,7 +31,7 @@ public class GameObjectManager {
      */
     public void addGameObject(AbstractGameObject gameObject) {
 
-        if (gameObject != null || gameObjectMap.containsKey(gameObject.getId())) return;
+        if (gameObject == null || gameObjectMap.containsKey(gameObject.getId())) return;
         gameObjectMap.put(gameObject.getId(), gameObject);
 
         // Initializes all components after adding it to the
