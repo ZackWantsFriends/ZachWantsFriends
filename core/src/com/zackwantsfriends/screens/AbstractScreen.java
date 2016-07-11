@@ -9,7 +9,7 @@ import com.badlogic.gdx.utils.viewport.StretchViewport;
 
 public abstract class AbstractScreen extends Stage implements Screen {
     protected AbstractScreen() {
-        super(new StretchViewport(1280, 720, new OrthographicCamera()));
+        super(new StretchViewport(320, 180, new OrthographicCamera()));
     }
 
     // Load actors in this method
@@ -23,7 +23,7 @@ public abstract class AbstractScreen extends Stage implements Screen {
     @Override
     public void render(float delta) {
         // Clear screen
-        Gdx.gl.glClearColor(1, 0, 0, 1);
+        Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         // Calling to Stage methods

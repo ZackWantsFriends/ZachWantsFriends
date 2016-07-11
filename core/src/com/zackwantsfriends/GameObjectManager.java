@@ -1,12 +1,15 @@
 package com.zackwantsfriends;
 
+import com.zackwantsfriends.components.AbstractComponent;
+import com.zackwantsfriends.gameobjects.AbstractGameObject;
+
 import java.util.HashMap;
 
 public class GameObjectManager {
 
-    //TODO: GameObject events (added, removed)
+    //TODO: AbstractGameObject events (added, removed)
 
-    private HashMap<Integer, GameObject> gameObjectMap;
+    private HashMap<Integer, AbstractGameObject> gameObjectMap;
 
     public GameObjectManager() {
         gameObjectMap = new HashMap<>();
@@ -17,8 +20,8 @@ public class GameObjectManager {
      *
      * @return Returns all gameobjects.
      */
-    public GameObject[] getGameObjects() {
-        return (GameObject[]) gameObjectMap.values().toArray();
+    public AbstractGameObject[] getGameObjects() {
+        return (AbstractGameObject[]) gameObjectMap.values().toArray();
     }
 
     /**
@@ -26,7 +29,7 @@ public class GameObjectManager {
      *
      * @param gameObject The gameobject.
      */
-    public void addGameObject(GameObject gameObject) {
+    public void addGameObject(AbstractGameObject gameObject) {
 
         if (gameObject != null || gameObjectMap.containsKey(gameObject.getId())) return;
         gameObjectMap.put(gameObject.getId(), gameObject);
@@ -34,12 +37,12 @@ public class GameObjectManager {
         // Initializes all components after adding it to the
         // gameobjectmanager. So you have access
         // to every component in the initialize-method.
-        for (Component component : gameObject.getComponents()) {
+        for (AbstractComponent component : gameObject.getComponents()) {
             component.initialize();
         }
 
         // maybe fire an event?
-        // GameObject added?
+        // AbstractGameObject added?
     }
 
     /**
@@ -48,7 +51,7 @@ public class GameObjectManager {
      * @param id The id of the gameobject.
      * @return Returns the gameobject.
      */
-    public GameObject getGameObject(int id) {
+    public AbstractGameObject getGameObject(int id) {
         if (gameObjectMap.containsKey(id)) {
             return gameObjectMap.get(id);
         }

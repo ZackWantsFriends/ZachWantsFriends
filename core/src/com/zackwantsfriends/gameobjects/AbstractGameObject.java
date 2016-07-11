@@ -1,23 +1,23 @@
-package com.zackwantsfriends;
+package com.zackwantsfriends.gameobjects;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.zackwantsfriends.components.AbstractComponent;
 
 import java.util.HashMap;
 
-public class GameObject extends Actor {
+public class AbstractGameObject extends Actor {
     private static int nextId = 0;
 
     private int id;
     private String name;
 
-    private HashMap<Class, Component> componentMap = new HashMap<>();
+    private HashMap<Class, AbstractComponent> componentMap = new HashMap<>();
 
-    public GameObject() {
+    public AbstractGameObject() {
         this.id = nextId++;
-        this.name = "GameObject" + id;
+        this.name = "AbstractGameObject" + id;
     }
 
     /**
@@ -52,8 +52,8 @@ public class GameObject extends Actor {
      *
      * @return Returns all components
      */
-    public Component[] getComponents() {
-        return (Component[]) componentMap.values().toArray();
+    public AbstractComponent[] getComponents() {
+        return (AbstractComponent[]) componentMap.values().toArray();
     }
 
     /**
@@ -61,7 +61,7 @@ public class GameObject extends Actor {
      *
      * @param component The type of the component.
      */
-    public void addComponent(Component component) {
+    public void addComponent(AbstractComponent component) {
         componentMap.put(component.getClass(), component);
         component.setGameObject(this);
     }
@@ -94,7 +94,7 @@ public class GameObject extends Actor {
 
     @Override
     public void act(float delta) {
-        for (Component cmp : componentMap.values()) {
+        for (AbstractComponent cmp : componentMap.values()) {
             cmp.update(Gdx.graphics.getDeltaTime());
         }
         super.act(delta);
@@ -103,7 +103,7 @@ public class GameObject extends Actor {
     @Override
     public void draw(Batch batch, float parentAlpha) {
 
-        for (Component cmp : componentMap.values()) {
+        for (AbstractComponent cmp : componentMap.values()) {
             cmp.render(batch);
         }
         super.draw(batch, parentAlpha);

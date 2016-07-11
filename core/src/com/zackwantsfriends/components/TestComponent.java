@@ -1,16 +1,21 @@
 package com.zackwantsfriends.components;
 
-import com.zackwantsfriends.Component;
-
-public class TestComponent extends Component {
-
+public class TestComponent extends AbstractComponent {
     public int health = 200;
+    TextureComponent textureComponent;
+
+    @Override
+    public void initialize() {
+        textureComponent = getGameObject().getComponent(TextureComponent.class);
+    }
 
     @Override
     public void update(float deltaTime) {
-
-        this.getGameObject().moveBy(2f, 0);
-
-        super.update(deltaTime);
+        if (health > 0) {
+            this.getGameObject().moveBy(1f, 0);
+            health--;
+        } else {
+            getGameObject().setRotation(90f);
+        }
     }
 }

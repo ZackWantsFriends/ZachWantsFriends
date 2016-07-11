@@ -1,10 +1,11 @@
-package com.zackwantsfriends;
+package com.zackwantsfriends.components;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.zackwantsfriends.gameobjects.AbstractGameObject;
 
-public abstract class Component {
+public abstract class AbstractComponent {
 
-    private GameObject gameObject;
+    private AbstractGameObject gameObject;
     private boolean active;
 
     /**
@@ -30,7 +31,7 @@ public abstract class Component {
      *
      * @return Returns the attached gameobject.
      */
-    public GameObject getGameObject() {
+    public AbstractGameObject getGameObject() {
         return gameObject;
     }
 
@@ -39,7 +40,7 @@ public abstract class Component {
      *
      * @param gameObject The gameobject.
      */
-    public void setGameObject(GameObject gameObject) {
+    public void setGameObject(AbstractGameObject gameObject) {
         this.gameObject = gameObject;
     }
 
