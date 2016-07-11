@@ -92,6 +92,15 @@ public class AbstractGameObject extends Actor {
         }
     }
 
+    /**
+     * Initialize all owned components
+     */
+    public void initialize() {
+        for (AbstractComponent cmp : componentMap.values()) {
+            cmp.initialize();
+        }
+    }
+
     @Override
     public void act(float delta) {
         for (AbstractComponent cmp : componentMap.values()) {

@@ -10,7 +10,9 @@ public class PlayerGameObject extends AbstractGameObject {
         // Each tile is 32x32
         // We want it to animate, and change frames after 0.3 seconds
         TextureComponent textureComponent = new TextureComponent("zombie.png", 32, 32, true, 0.3f);
+        TestComponent testComponent = new TestComponent();
         addComponent(textureComponent);
-        addComponent(new TestComponent());
+        addComponent(testComponent);
+        initialize();
     }
 }
