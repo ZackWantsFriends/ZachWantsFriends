@@ -63,6 +63,7 @@ public class GameObject extends Actor {
      */
     public void addComponent(Component component) {
         componentMap.put(component.getClass(), component);
+        component.setGameObject(this);
     }
 
     /**
