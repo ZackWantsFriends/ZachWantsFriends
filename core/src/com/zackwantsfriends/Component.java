@@ -1,6 +1,6 @@
 package com.zackwantsfriends;
 
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.Batch;
 
 public abstract class Component {
 
@@ -50,13 +50,16 @@ public abstract class Component {
     public void initialize() {
     }
 
+    public void update(float deltaTime) {
+
+    }
+
     /**
      * Renders the component.
      *
      * @param batch The spritebatch.
-     * @param deltaTime The deltatime.
      */
-    public void render(SpriteBatch batch, float deltaTime) {
+    public void render(Batch batch) {
 
     }
 

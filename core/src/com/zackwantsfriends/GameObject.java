@@ -1,10 +1,13 @@
 package com.zackwantsfriends;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 
 import java.util.HashMap;
 
-public class GameObject {
+public class GameObject extends Actor {
     private static int nextId = 0;
 
     private int id;
@@ -104,5 +107,22 @@ public class GameObject {
         if (componentMap.containsKey(componentClass)) {
             componentMap.remove(componentClass);
         }
+    }
+
+    @Override
+    public void act(float delta) {
+        for (Component cmp : componentMap.values()) {
+            cmp.update(Gdx.graphics.getDeltaTime());
+        }
+        super.act(delta);
+    }
+
+    @Override
+    public void draw(Batch batch, float parentAlpha) {
+
+        for (Component cmp : componentMap.values()) {
+            cmp.render(batch);
+        }
+        super.draw(batch, parentAlpha);
     }
 }
