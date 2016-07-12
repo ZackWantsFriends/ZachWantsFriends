@@ -96,30 +96,18 @@ public class AbstractGameObject extends Actor {
      * Initialize all owned components
      */
     public void initialize() {
-        for (AbstractComponent component : componentMap.values()) {
-            component.initialize();
-        }
+        componentMap.values().forEach(AbstractComponent::initialize);
     }
 
     @Override
     public void act(float delta) {
-        for (AbstractComponent cmp : componentMap.values()) {
-            if (cmp.isActive()) {
-                cmp.update(Gdx.graphics.getDeltaTime());
-            }
-        }
+        componentMap.values().stream().filter(AbstractComponent::isActive).forEach(component -> component.update(Gdx.graphics.getDeltaTime()));
         super.act(delta);
     }
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
-
-        for (AbstractComponent cmp : componentMap.values()) {
-            if (cmp.isActive()) {
-                cmp.render(batch);
-            }
-
-        }
+        componentMap.values().stream().filter(AbstractComponent::isActive).forEach(component -> component.render(batch));
         super.draw(batch, parentAlpha);
     }
 }
