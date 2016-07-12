@@ -103,8 +103,10 @@ public class AbstractGameObject extends Actor {
 
     @Override
     public void act(float delta) {
-        for (AbstractComponent component : componentMap.values()) {
-            component.update(Gdx.graphics.getDeltaTime());
+        for (AbstractComponent cmp : componentMap.values()) {
+            if (cmp.isActive()) {
+                cmp.update(Gdx.graphics.getDeltaTime());
+            }
         }
         super.act(delta);
     }
@@ -112,8 +114,11 @@ public class AbstractGameObject extends Actor {
     @Override
     public void draw(Batch batch, float parentAlpha) {
 
-        for (AbstractComponent component : componentMap.values()) {
-            component.render(batch);
+        for (AbstractComponent cmp : componentMap.values()) {
+            if (cmp.isActive()) {
+                cmp.render(batch);
+            }
+
         }
         super.draw(batch, parentAlpha);
     }
