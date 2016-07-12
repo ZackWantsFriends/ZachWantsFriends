@@ -1,13 +1,19 @@
 package com.zackwantsfriends.components;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
+import com.zackwantsfriends.GameObjectManager;
 import com.zackwantsfriends.gameobjects.AbstractGameObject;
 
 public abstract class AbstractComponent extends InputListener {
 
     private AbstractGameObject gameObject;
     private boolean active;
+
+    public AbstractComponent() {
+        setActive(true);
+    }
 
     /**
      * Whether or not the component is currently active.
@@ -50,6 +56,7 @@ public abstract class AbstractComponent extends InputListener {
      * Use this method to get other components from the gameobject.
      */
     public void initialize() {
+
     }
 
     public void update(float deltaTime) {
