@@ -64,7 +64,6 @@ public class AbstractGameObject extends Actor {
     public void addComponent(AbstractComponent component) {
         componentMap.put(component.getClass(), component);
         component.setGameObject(this);
-        addListener(component);
     }
 
     /**
@@ -97,15 +96,15 @@ public class AbstractGameObject extends Actor {
      * Initialize all owned components
      */
     public void initialize() {
-        for (AbstractComponent cmp : componentMap.values()) {
-            cmp.initialize();
+        for (AbstractComponent component : componentMap.values()) {
+            component.initialize();
         }
     }
 
     @Override
     public void act(float delta) {
-        for (AbstractComponent cmp : componentMap.values()) {
-            cmp.update(Gdx.graphics.getDeltaTime());
+        for (AbstractComponent component : componentMap.values()) {
+            component.update(Gdx.graphics.getDeltaTime());
         }
         super.act(delta);
     }
@@ -113,8 +112,8 @@ public class AbstractGameObject extends Actor {
     @Override
     public void draw(Batch batch, float parentAlpha) {
 
-        for (AbstractComponent cmp : componentMap.values()) {
-            cmp.render(batch);
+        for (AbstractComponent component : componentMap.values()) {
+            component.render(batch);
         }
         super.draw(batch, parentAlpha);
     }
