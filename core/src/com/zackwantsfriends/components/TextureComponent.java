@@ -6,13 +6,15 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class TextureComponent extends AbstractComponent {
-    private Texture texture;
-    private TextureRegion[][] textureRegions;
-    private boolean animate;
-    private float timePerFrame;
+    private InputHandlerMovementComponent inputHandlerMovementComponent;
 
+    private TextureRegion[][] textureRegions;
+    private float timePerFrame;
     private int currentFrame;
     private float timeOnFrame;
+
+    private boolean animate;
+    private boolean flip;
 
     /**
      * @param path         path to the texture image
@@ -20,7 +22,7 @@ public class TextureComponent extends AbstractComponent {
      * @param regionHeight height in px of each region of the texture
      */
     public TextureComponent(String path, int regionWidth, int regionHeight, boolean animate, float timePerFrame) {
-        texture = new Texture(Gdx.files.internal(path));
+        Texture texture = new Texture(Gdx.files.internal(path));
         textureRegions = TextureRegion.split(texture, regionWidth, regionHeight);
         this.animate = animate;
         this.timePerFrame = timePerFrame;
@@ -29,12 +31,23 @@ public class TextureComponent extends AbstractComponent {
         currentFrame = 0;
     }
 
-    public void setAnimate(boolean animate) {
-        this.animate = animate;
+    @Override
+    public void initialize() {
+        inputHandlerMovementComponent = getGameObject().getComponent(InputHandlerMovementComponent.class);
     }
 
     @Override
     public void update(float deltaTime) {
+        if (inputHandlerMovementComponent.getMovementVector() == 0) {
+            animate = false;
+        } else if (inputHandlerMovementComponent.getMovementVector() < 0) {
+            animate = true;
+            flip = true;
+        } else if (inputHandlerMovementComponent.getMovementVector() > 0) {
+            animate = true;
+            flip = false;
+        }
+
         if (animate) {
             if (timeOnFrame > timePerFrame) {   // check if it's time to go to the next frame yet
                 currentFrame = ++currentFrame % textureRegions[0].length;
@@ -52,6 +65,14 @@ public class TextureComponent extends AbstractComponent {
         batch.draw(textureRegions[0][currentFrame], getGameObject().getX(), getGameObject().getY(),
                 getGameObject().getOriginX(), getGameObject().getOriginY(),
                 textureRegions[0][currentFrame].getRegionWidth(), textureRegions[0][currentFrame].getRegionHeight(),
-                getGameObject().getScaleX(), getGameObject().getScaleY(), getGameObject().getRotation());
+                getGameObject().getScaleX() * (flip ? -1 : 1), getGameObject().getScaleY(), getGameObject().getRotation());
+    }
+
+    public void setAnimate(boolean animate) {
+        this.animate = animate;
+    }
+
+    public void setFlip(boolean flip) {
+        this.flip = flip;
     }
 }

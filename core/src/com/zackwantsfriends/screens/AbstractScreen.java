@@ -10,7 +10,7 @@ import com.badlogic.gdx.utils.viewport.StretchViewport;
 
 public abstract class AbstractScreen extends Stage implements Screen {
     protected AbstractScreen() {
-        super(new StretchViewport(320, 180, new OrthographicCamera()));
+        super(new StretchViewport(640, 360, new OrthographicCamera()));
         Gdx.input.setInputProcessor(new InputMultiplexer(this));
     }
 
