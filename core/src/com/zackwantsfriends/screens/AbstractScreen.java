@@ -8,6 +8,9 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
+import com.zackwantsfriends.components.AbstractComponent;
+import com.zackwantsfriends.components.Collision.CollisionComponent;
+import com.zackwantsfriends.gameobjects.AbstractGameObject;
 import com.zackwantsfriends.manager.CollisionManager;
 
 public abstract class AbstractScreen extends Stage implements Screen {
@@ -20,9 +23,16 @@ public abstract class AbstractScreen extends Stage implements Screen {
 
         collisionManager = new CollisionManager();
     }
-
     // Load actors in this method
     public abstract void buildStage();
+
+    public void addActor(AbstractGameObject gameObject) {
+        getActors().add(gameObject);
+
+        if (gameObject.getComponent(CollisionComponent.class) != null) {
+            collisionManager.addCollider(gameObject.getComponent(CollisionComponent.class));
+        }
+    }
 
     @Override
     public void show() {
