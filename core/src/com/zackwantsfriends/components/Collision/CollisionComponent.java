@@ -1,7 +1,8 @@
-package com.zackwantsfriends.components;
+package com.zackwantsfriends.components.Collision;
 
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.zackwantsfriends.components.AbstractComponent;
 
 public class CollisionComponent extends AbstractComponent {
     private Rectangle AABB;
