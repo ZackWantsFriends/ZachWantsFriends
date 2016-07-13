@@ -8,11 +8,17 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
+import com.zackwantsfriends.manager.CollisionManager;
 
 public abstract class AbstractScreen extends Stage implements Screen {
+
+    private CollisionManager collisionManager;
+
     protected AbstractScreen() {
         super(new StretchViewport(640, 360, new OrthographicCamera()));
         Gdx.input.setInputProcessor(new InputMultiplexer(this));
+
+        collisionManager = new CollisionManager();
     }
 
     // Load actors in this method

@@ -7,6 +7,11 @@ import com.zackwantsfriends.components.AbstractComponent;
 public class CollisionComponent extends AbstractComponent {
 
     private CollisionType collisionType;
+
+    public Rectangle getBounds() {
+        return bounds;
+    }
+
     private Rectangle bounds;
 
     public CollisionComponent() {
