@@ -10,8 +10,8 @@ public class PlayerGameObject extends AbstractGameObject {
         setOrigin(16, 16);
         // Create a new Texture component using the spritesheet "zombie.png"
         // Each tile is 32x32
-        // We want it to animate, and change frames after 0.3 seconds
-        TextureComponent textureComponent = new TextureComponent("zombie.png", 32, 32, true, 0.3f);
+        // We want it to animate, and change frames after 0.1 seconds
+        TextureComponent textureComponent = new TextureComponent("zombie.png", 32, 32, true, 0.10f);
         InputHandlerMovementComponent inputHandlerMovementComponent = new InputHandlerMovementComponent();
 
         // Add components to game object
