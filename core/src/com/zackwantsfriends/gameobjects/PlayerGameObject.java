@@ -1,5 +1,6 @@
 package com.zackwantsfriends.gameobjects;
 
+import com.zackwantsfriends.components.Collision.CollisionComponent;
 import com.zackwantsfriends.components.InputHandlerMovementComponent;
 import com.zackwantsfriends.components.TextureComponent;
 
@@ -15,6 +16,7 @@ public class PlayerGameObject extends AbstractGameObject {
         InputHandlerMovementComponent inputHandlerMovementComponent = new InputHandlerMovementComponent();
 
         // Add components to game object
+        addComponent(new CollisionComponent());
         addComponent(textureComponent);
         addComponent(inputHandlerMovementComponent);
 
