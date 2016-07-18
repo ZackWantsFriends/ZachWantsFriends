@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
+import com.zackwantsfriends.GameObjectManager;
 import com.zackwantsfriends.components.AbstractComponent;
 import com.zackwantsfriends.components.Collision.CollisionComponent;
 import com.zackwantsfriends.gameobjects.AbstractGameObject;
@@ -46,8 +47,18 @@ public abstract class AbstractScreen extends Stage implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         // Calling to Stage methods
-        super.act(delta);
+        //super.act(delta);
+        update(delta);
         super.draw();
+    }
+
+    public void update(float delta) {
+        for (int i = 0, n = getActors().size; i < n; i++) {
+            AbstractGameObject gameObject = (AbstractGameObject) getActors().get(i);
+            collisionManager.update(gameObject);
+            gameObject.act(delta);
+            getRoot().act(delta);
+        }
     }
 
     @Override
