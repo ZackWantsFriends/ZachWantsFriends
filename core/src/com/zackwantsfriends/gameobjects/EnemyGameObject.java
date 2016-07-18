@@ -13,7 +13,7 @@ public class EnemyGameObject extends AbstractGameObject {
     public EnemyGameObject() {
         super();
         setPosition(200, 0);
-        setSize(32, 32);
+        setSize(224, 32);
         setOrigin(16, 16);
         // Create a new Texture component using the spritesheet "zombie.png"
         // Each tile is 32x32

@@ -48,13 +48,12 @@ public class CollisionManager {
 
                         // gets the overlapping rectangle to resolve the collision
                         Rectangle intersection = new Rectangle(0, 0, 0, 0);
-                        Intersector.intersectRectangles(collisionCmp.getBounds(), nextCollider.getBounds(), intersection);
+                        Intersector.intersectRectangles(currentCollider.getBounds(), nextCollider.getBounds(), intersection);
 
                         CollisionType collisionType = nextCollider.getCollisionType();
 
-                        //BUGS:
-                        // - I don't get the correct collision type of the other collider...
-                        // - The other gameojbect jumps back the full width of the rectangle
+                        System.out.println(collisionType);
+
 
                         // Intersection with the right side
                         if (intersection.getX() > currentCollider.getBounds().getX()) {
@@ -75,6 +74,14 @@ public class CollisionManager {
 
                         // Intersection with the left side
                         if (intersection.getX() + intersection.getWidth() < currentCollider.getBounds().getX() + currentCollider.getBounds().getWidth()) {
+                            switch (collisionType) {
+                                case DYNAMIC:
+                                    nextCollider.getGameObject().moveBy(-intersection.getWidth(), 0);
+                                    break;
+                                case STATIC:
+                                    currentCollider.getGameObject().moveBy(intersection.getWidth(), 0);
+                                    break;
+                            }
 
                         }
 

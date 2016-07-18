@@ -15,6 +15,7 @@ public class CollisionComponent extends AbstractComponent {
     private Rectangle bounds;
 
     public CollisionComponent() {
+        collisionType = CollisionType.DYNAMIC;
     }
 
     @Override
@@ -22,8 +23,6 @@ public class CollisionComponent extends AbstractComponent {
         super.initialize();
         bounds = new Rectangle(getGameObject().getX(), getGameObject().getY(),
                 getGameObject().getWidth(), getGameObject().getHeight());
-
-        collisionType = CollisionType.DYNAMIC;
     }
 
     public CollisionType getCollisionType() {
@@ -40,14 +39,17 @@ public class CollisionComponent extends AbstractComponent {
         bounds.setPosition(getGameObject().getX(), getGameObject().getY());
     }
 
-    static public boolean intersect(Rectangle rectangle1, Rectangle rectangle2, Rectangle intersection) {
-        if (rectangle1.overlaps(rectangle2)) {
-            intersection.x = Math.max(rectangle1.x, rectangle2.x);
-            intersection.width = Math.min(rectangle1.x + rectangle1.width, rectangle2.x + rectangle2.width) - intersection.x;
-            intersection.y = Math.max(rectangle1.y, rectangle2.y);
-            intersection.height = Math.min(rectangle1.y + rectangle1.height, rectangle2.y + rectangle2.height) - intersection.y;
-            return true;
+    public static boolean intersect(Rectangle r1, Rectangle r2, Rectangle intersection) {
+        if (!r1.overlaps(r2)) {
+            return false;
         }
-        return false;
+
+        float x = Math.max(r1.x, r2.x);
+        float y = Math.max(r1.y, r2.y);
+        float width = Math.min(r1.x + r1.width, r2.x + r2.width) - x;
+        float height = Math.min(r1.y + r1.height, r2.y + r2.height) - y;
+        intersection.set(x, y, width, height);
+
+        return true;
     }
 }
