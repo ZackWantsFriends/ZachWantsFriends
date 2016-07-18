@@ -4,6 +4,7 @@ import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.zackwantsfriends.components.Collision.CollisionComponent;
+import com.zackwantsfriends.components.Collision.CollisionType;
 import com.zackwantsfriends.gameobjects.AbstractGameObject;
 import com.zackwantsfriends.util.QuadRectangle;
 import com.zackwantsfriends.util.QuadTree;
@@ -46,12 +47,42 @@ public class CollisionManager {
                     if (Intersector.overlaps(currentCollider.getBounds(), nextCollider.getBounds())) {
 
                         // gets the overlapping rectangle to resolve the collision
-                        Rectangle intersection = null;
+                        Rectangle intersection = new Rectangle(0, 0, 0, 0);
                         Intersector.intersectRectangles(collisionCmp.getBounds(), nextCollider.getBounds(), intersection);
 
-                        //TODO: RESOLVE COLLISION
-                    }
+                        CollisionType collisionType = nextCollider.getCollisionType();
 
+                        //BUGS:
+                        // - I don't get the correct collision type of the other collider...
+                        // - The other gameojbect jumps back the full width of the rectangle
+
+                        // Intersection with the right side
+                        if (intersection.getX() > currentCollider.getBounds().getX()) {
+                            switch (collisionType) {
+                                case DYNAMIC:
+                                    nextCollider.getGameObject().moveBy(intersection.getWidth(), 0);
+                                    break;
+                                case STATIC:
+                                    currentCollider.getGameObject().moveBy(-intersection.getWidth(), 0);
+                                    break;
+                            }
+                        }
+
+                        // Intersection with the top side
+                        if (intersection.getY() > currentCollider.getBounds().getY()) {
+
+                        }
+
+                        // Intersection with the left side
+                        if (intersection.getX() + intersection.getWidth() < currentCollider.getBounds().getX() + currentCollider.getBounds().getWidth()) {
+
+                        }
+
+                        // Intersection with the bottom side
+                        if (intersection.getY() + intersection.getHeight() < currentCollider.getBounds().getY() + currentCollider.getBounds().getHeight()) {
+
+                        }
+                    }
                 }
 
             }

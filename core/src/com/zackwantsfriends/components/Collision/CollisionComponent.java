@@ -24,8 +24,6 @@ public class CollisionComponent extends AbstractComponent {
                 getGameObject().getWidth(), getGameObject().getHeight());
 
         collisionType = CollisionType.DYNAMIC;
-
-        System.out.println(bounds.toString());
     }
 
     public CollisionType getCollisionType() {
@@ -40,5 +38,16 @@ public class CollisionComponent extends AbstractComponent {
     public void update(float deltaTime) {
 
         bounds.setPosition(getGameObject().getX(), getGameObject().getY());
+    }
+
+    static public boolean intersect(Rectangle rectangle1, Rectangle rectangle2, Rectangle intersection) {
+        if (rectangle1.overlaps(rectangle2)) {
+            intersection.x = Math.max(rectangle1.x, rectangle2.x);
+            intersection.width = Math.min(rectangle1.x + rectangle1.width, rectangle2.x + rectangle2.width) - intersection.x;
+            intersection.y = Math.max(rectangle1.y, rectangle2.y);
+            intersection.height = Math.min(rectangle1.y + rectangle1.height, rectangle2.y + rectangle2.height) - intersection.y;
+            return true;
+        }
+        return false;
     }
 }
