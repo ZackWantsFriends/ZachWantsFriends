@@ -53,7 +53,7 @@ public class AbstractGameObject extends Actor {
      * @return Returns all components
      */
     public AbstractComponent[] getComponents() {
-        return (AbstractComponent[]) componentMap.values().toArray();
+        return componentMap.values().toArray(new AbstractComponent[0]);
     }
 
     /**

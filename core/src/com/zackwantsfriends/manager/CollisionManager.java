@@ -3,7 +3,10 @@ package com.zackwantsfriends.manager;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.zackwantsfriends.components.AbstractComponent;
 import com.zackwantsfriends.components.Collision.CollisionComponent;
+import com.zackwantsfriends.components.Collision.CollisionData;
+import com.zackwantsfriends.components.Collision.CollisionSide;
 import com.zackwantsfriends.components.Collision.CollisionType;
 import com.zackwantsfriends.gameobjects.AbstractGameObject;
 import com.zackwantsfriends.util.QuadRectangle;
@@ -50,10 +53,11 @@ public class CollisionManager {
                         Rectangle intersection = new Rectangle(0, 0, 0, 0);
                         Intersector.intersectRectangles(currentCollider.getBounds(), nextCollider.getBounds(), intersection);
 
+                        // default collision side
+                        CollisionSide collisionSide = CollisionSide.TOP;
+
+                        // gets the type of the collider
                         CollisionType collisionType = nextCollider.getCollisionType();
-
-                        System.out.println(collisionType);
-
 
                         // Intersection with the right side
                         if (intersection.getX() > currentCollider.getBounds().getX()) {
@@ -64,12 +68,27 @@ public class CollisionManager {
                                 case STATIC:
                                     currentCollider.getGameObject().moveBy(-intersection.getWidth(), 0);
                                     break;
+                                case TRIGGER:
+                                    // do nothing
+                                    break;
                             }
+                            collisionSide = CollisionSide.RIGHT;
                         }
 
                         // Intersection with the top side
                         if (intersection.getY() > currentCollider.getBounds().getY()) {
-
+                            switch (collisionType) {
+                                case DYNAMIC:
+                                    nextCollider.getGameObject().moveBy(0, intersection.getHeight());
+                                    break;
+                                case STATIC:
+                                    currentCollider.getGameObject().moveBy(0, -intersection.getHeight());
+                                    break;
+                                case TRIGGER:
+                                    // do nothing
+                                    break;
+                            }
+                            collisionSide = CollisionSide.TOP;
                         }
 
                         // Intersection with the left side
@@ -81,13 +100,34 @@ public class CollisionManager {
                                 case STATIC:
                                     currentCollider.getGameObject().moveBy(intersection.getWidth(), 0);
                                     break;
+                                case TRIGGER:
+                                    // do nothing
+                                    break;
                             }
 
+                            collisionSide = CollisionSide.LEFT;
                         }
 
                         // Intersection with the bottom side
                         if (intersection.getY() + intersection.getHeight() < currentCollider.getBounds().getY() + currentCollider.getBounds().getHeight()) {
 
+                            switch (collisionType) {
+                                case DYNAMIC:
+                                    nextCollider.getGameObject().moveBy(0, -intersection.getHeight());
+                                    break;
+                                case STATIC:
+                                    currentCollider.getGameObject().moveBy(0, intersection.getHeight());
+                                    break;
+                                case TRIGGER:
+                                    // do nothing
+                                    break;
+                            }
+                            collisionSide = CollisionSide.BOTTOM;
+                        }
+
+                        // notify every component of the gameobject that a collision took place.
+                        for (int i = 0; i < gameObject.getComponents().length; i++) {
+                            currentCollider.getGameObject().getComponents()[i].onCollision(new CollisionData(nextCollider, collisionSide));
                         }
                     }
                 }

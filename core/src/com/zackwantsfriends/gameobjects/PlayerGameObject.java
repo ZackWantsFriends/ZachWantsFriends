@@ -7,6 +7,7 @@ import com.zackwantsfriends.components.AnimationComponent;
 public class PlayerGameObject extends AbstractGameObject {
     public PlayerGameObject() {
         super();
+        setName("PLAYER");
         setPosition(0, 0);
         setSize(32, 32);
         setOrigin(16, 16);

@@ -4,14 +4,13 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.zackwantsfriends.components.Collision.CollisionComponent;
 import com.zackwantsfriends.components.Collision.CollisionType;
-import com.zackwantsfriends.components.InputHandlerMovementComponent;
-import com.zackwantsfriends.components.AnimationComponent;
 import com.zackwantsfriends.components.TextureComponent;
 
 public class EnemyGameObject extends AbstractGameObject {
 
     public EnemyGameObject() {
         super();
+        setName("ENEMY");
         setPosition(200, 0);
         setSize(224, 32);
         setOrigin(16, 16);

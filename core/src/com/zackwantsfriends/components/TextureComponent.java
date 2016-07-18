@@ -2,6 +2,7 @@ package com.zackwantsfriends.components;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.zackwantsfriends.components.Collision.CollisionData;
 
 import java.awt.*;
 
@@ -13,6 +14,12 @@ public class TextureComponent extends AbstractComponent {
 
         this.texture = texture;
 
+    }
+
+    @Override
+    public void onCollision(CollisionData collisionData) {
+        super.onCollision(collisionData);
+        System.out.println("COLLIDED WITH: " + collisionData.getOtherCollider().getGameObject().getName());
     }
 
     @Override
