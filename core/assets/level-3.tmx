@@ -3,6 +3,17 @@
  <tileset firstgid="1" name="tiles-V3" tilewidth="32" tileheight="32" tilecount="96" columns="8">
   <image source="tiles-V3.png" trans="000000" width="256" height="384"/>
  </tileset>
+ <objectgroup name="objects">
+  <object id="1" name="player_spawn" x="32" y="544" width="32" height="32"/>
+  <object id="4" name="tile_collision" x="0" y="608" width="2240" height="32"/>
+  <object id="6" name="tile_collision" x="1248" y="576" width="256" height="32"/>
+  <object id="7" name="tile_collision" x="1280" y="544" width="224" height="32"/>
+  <object id="8" name="tile_collision" x="1312" y="512" width="192" height="32"/>
+  <object id="9" name="tile_collision" x="1344" y="480" width="160" height="32"/>
+  <object id="12" name="enemy_spawn" x="1408" y="448" width="32" height="32"/>
+  <object id="16" name="tile_collision" x="416" y="544" width="64" height="32"/>
+  <object id="17" name="tile_collision" x="384" y="576" width="128" height="32"/>
+ </objectgroup>
  <imagelayer name="background">
   <image source="backgrounds.png" width="2240" height="640"/>
  </imagelayer>
@@ -30,15 +41,4 @@
 49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49
 </data>
  </layer>
- <objectgroup name="objects">
-  <object id="1" name="player_spawn" x="32" y="544" width="32" height="32"/>
-  <object id="4" name="tile_collision" x="0" y="608" width="2240" height="32"/>
-  <object id="6" name="tile_collision" x="1248" y="576" width="256" height="32"/>
-  <object id="7" name="tile_collision" x="1280" y="544" width="224" height="32"/>
-  <object id="8" name="tile_collision" x="1312" y="512" width="192" height="32"/>
-  <object id="9" name="tile_collision" x="1344" y="480" width="160" height="32"/>
-  <object id="12" name="enemy_spawn" x="1408" y="448" width="32" height="32"/>
-  <object id="16" name="tile_collision" x="416" y="544" width="64" height="32"/>
-  <object id="17" name="tile_collision" x="384" y="576" width="128" height="32"/>
- </objectgroup>
 </map>

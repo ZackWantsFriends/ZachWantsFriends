@@ -20,8 +20,8 @@ public class GameScreen extends AbstractScreen {
         TiledMap tiledMap = tmxMapLoader.load("level-3.tmx");
         tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap);
 
-        // third layer is object layer
-        for (MapObject object : tiledMap.getLayers().get(2).getObjects()) {
+        // first layer should always be the object layer
+        for (MapObject object : tiledMap.getLayers().get(0).getObjects()) {
             if (object.getName().equals("player_spawn")) {
                 float x = ((RectangleMapObject) object).getRectangle().getX();
                 float y = ((RectangleMapObject) object).getRectangle().getY();
