@@ -73,7 +73,7 @@ public class AbstractGameObject extends Actor {
      * @param <T>            The componenttype.
      * @return Returns the component.
      */
-    public <T> T getComponent(Class<T> componentClass) {
+    public <T extends AbstractComponent> T getComponent(Class<T> componentClass) {
         if (componentMap.containsKey(componentClass)) {
             return componentClass.cast(componentMap.get(componentClass));
         }
@@ -86,7 +86,7 @@ public class AbstractGameObject extends Actor {
      * @param componentClass The class of the component.
      * @param <T>            The type of the component.
      */
-    public <T> void removeComponent(Class<T> componentClass) {
+    public <T extends AbstractGameObject> void removeComponent(Class<T> componentClass) {
         if (componentMap.containsKey(componentClass)) {
             componentMap.remove(componentClass);
         }

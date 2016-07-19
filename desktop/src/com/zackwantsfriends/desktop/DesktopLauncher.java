@@ -11,6 +11,9 @@ public class DesktopLauncher {
         config.title = "ZackWantsFriends";
         config.width = 1280;
         config.height = 720;
+
+        if(arg.length > 0 && arg[0].equals("debug")) TheGame.DEBUG = true;
+
         new LwjglApplication(new TheGame(), config);
     }
 }

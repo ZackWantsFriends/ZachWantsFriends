@@ -6,6 +6,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.zackwantsfriends.components.collision.CollisionComponent;
 import com.zackwantsfriends.gameobjects.AbstractGameObject;
@@ -15,7 +16,7 @@ public abstract class AbstractScreen extends Stage implements Screen {
     private CollisionManager collisionManager;
 
     protected AbstractScreen() {
-        super(new StretchViewport(640, 360, new OrthographicCamera()));
+        super(new FitViewport(640, 360, new OrthographicCamera()));
         Gdx.input.setInputProcessor(new InputMultiplexer(this));
 
         collisionManager = new CollisionManager();
