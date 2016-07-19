@@ -20,11 +20,11 @@ public class EnemyGameObject extends AbstractGameObject {
         //AnimationComponent animationComponent = new AnimationComponent("zombie.png", 32, 32, true, 0.10f);
         //InputHandlerMovementComponent inputHandlerMovementComponent = new InputHandlerMovementComponent();
 
-        Texture enemy = new Texture(Gdx.files.internal("zombie.png"));
+        Texture enemy = new Texture(Gdx.files.internal("zombie/idle_strip6.png"));
         TextureComponent textureComponent = new TextureComponent(enemy);
 
         CollisionComponent collisionComponent = new CollisionComponent();
-        collisionComponent.setCollisionType(CollisionType.STATIC);
+        collisionComponent.setCollisionType(CollisionType.TRIGGER);
 
         // Add components to game object
         addComponent(collisionComponent);

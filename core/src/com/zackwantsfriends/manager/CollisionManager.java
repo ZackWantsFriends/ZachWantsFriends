@@ -2,8 +2,6 @@ package com.zackwantsfriends.manager;
 
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.math.Vector2;
-import com.zackwantsfriends.components.AbstractComponent;
 import com.zackwantsfriends.components.Collision.CollisionComponent;
 import com.zackwantsfriends.components.Collision.CollisionData;
 import com.zackwantsfriends.components.Collision.CollisionSide;
@@ -20,8 +18,8 @@ public class CollisionManager {
 
     public CollisionManager() {
         quadTree = new QuadTree<CollisionComponent>(new QuadRectangle(0, 0, 0, 0), 0);
-        quadTree.maxItemByNode = 20;
-        quadTree.maxLevel = 10;
+        QuadTree.maxItemByNode = 20;
+        QuadTree.maxLevel = 10;
     }
 
     public void addCollider(CollisionComponent collisionCmp) {
@@ -126,7 +124,7 @@ public class CollisionManager {
                         }
 
                         // notify every component of the gameobject that a collision took place.
-                        for (int i = 0; i < gameObject.getComponents().length; i++) {
+                        for (int i = 0; i < currentCollider.getGameObject().getComponents().length; i++) {
                             currentCollider.getGameObject().getComponents()[i].onCollision(new CollisionData(nextCollider, collisionSide));
                         }
                     }

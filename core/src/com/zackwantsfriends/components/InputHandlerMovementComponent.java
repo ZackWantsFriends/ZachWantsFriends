@@ -15,7 +15,7 @@ public class InputHandlerMovementComponent extends AbstractComponent implements 
 
     @Override
     public void update(float deltaTime) {
-        getGameObject().moveBy(movementVector, 0);
+        getGameObject().moveBy(movementVector * 0.7f, 0);
     }
 
     public float getMovementVector() {
