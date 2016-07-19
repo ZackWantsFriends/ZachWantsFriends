@@ -5,17 +5,13 @@ import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
-import com.zackwantsfriends.GameObjectManager;
-import com.zackwantsfriends.components.AbstractComponent;
 import com.zackwantsfriends.components.Collision.CollisionComponent;
 import com.zackwantsfriends.gameobjects.AbstractGameObject;
 import com.zackwantsfriends.manager.CollisionManager;
 
 public abstract class AbstractScreen extends Stage implements Screen {
-
     private CollisionManager collisionManager;
 
     protected AbstractScreen() {
@@ -24,6 +20,7 @@ public abstract class AbstractScreen extends Stage implements Screen {
 
         collisionManager = new CollisionManager();
     }
+
     // Load actors in this method
     public abstract void buildStage();
 
@@ -49,10 +46,10 @@ public abstract class AbstractScreen extends Stage implements Screen {
         // Calling to Stage methods
         //super.act(delta);
         update(delta);
-        super.draw();
+        draw();
     }
 
-    public void update(float delta) {
+    void update(float delta) {
         for (int i = 0, n = getActors().size; i < n; i++) {
             AbstractGameObject gameObject = (AbstractGameObject) getActors().get(i);
             collisionManager.update(gameObject);
