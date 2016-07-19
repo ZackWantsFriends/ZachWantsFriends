@@ -1,4 +1,4 @@
-package com.zackwantsfriends.components.Collision;
+package com.zackwantsfriends.components.collision;
 
 public enum CollisionSide {
     TOP,

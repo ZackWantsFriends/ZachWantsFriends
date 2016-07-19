@@ -2,8 +2,8 @@ package com.zackwantsfriends.gameobjects;
 
 import com.zackwantsfriends.components.AnimationComponent;
 import com.zackwantsfriends.components.AnimationDefs;
-import com.zackwantsfriends.components.Collision.CollisionComponent;
-import com.zackwantsfriends.components.Collision.CollisionType;
+import com.zackwantsfriends.components.collision.CollisionComponent;
+import com.zackwantsfriends.components.collision.CollisionType;
 
 public class EnemyGameObject extends AbstractGameObject {
 

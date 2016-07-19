@@ -2,10 +2,10 @@ package com.zackwantsfriends.manager;
 
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
-import com.zackwantsfriends.components.Collision.CollisionComponent;
-import com.zackwantsfriends.components.Collision.CollisionData;
-import com.zackwantsfriends.components.Collision.CollisionSide;
-import com.zackwantsfriends.components.Collision.CollisionType;
+import com.zackwantsfriends.components.collision.CollisionComponent;
+import com.zackwantsfriends.components.collision.CollisionData;
+import com.zackwantsfriends.components.collision.CollisionSide;
+import com.zackwantsfriends.components.collision.CollisionType;
 import com.zackwantsfriends.gameobjects.AbstractGameObject;
 import com.zackwantsfriends.util.QuadRectangle;
 import com.zackwantsfriends.util.QuadTree;
@@ -17,7 +17,7 @@ public class CollisionManager {
     private QuadTree<CollisionComponent> quadTree;
 
     public CollisionManager() {
-        quadTree = new QuadTree<CollisionComponent>(new QuadRectangle(0, 0, 0, 0), 0);
+        quadTree = new QuadTree<>(new QuadRectangle(0, 0, 0, 0), 0);
         QuadTree.maxItemByNode = 20;
         QuadTree.maxLevel = 10;
     }

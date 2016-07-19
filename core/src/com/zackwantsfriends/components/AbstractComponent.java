@@ -1,11 +1,8 @@
 package com.zackwantsfriends.components;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
-import com.zackwantsfriends.GameObjectManager;
-import com.zackwantsfriends.components.Collision.CollisionComponent;
-import com.zackwantsfriends.components.Collision.CollisionData;
+import com.zackwantsfriends.components.collision.CollisionData;
 import com.zackwantsfriends.gameobjects.AbstractGameObject;
 
 public abstract class AbstractComponent extends InputListener {

@@ -7,7 +7,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
-import com.zackwantsfriends.components.Collision.CollisionComponent;
+import com.zackwantsfriends.components.collision.CollisionComponent;
 import com.zackwantsfriends.gameobjects.AbstractGameObject;
 import com.zackwantsfriends.manager.CollisionManager;
 

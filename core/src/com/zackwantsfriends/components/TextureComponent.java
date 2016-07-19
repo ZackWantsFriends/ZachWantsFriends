@@ -2,9 +2,7 @@ package com.zackwantsfriends.components;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.zackwantsfriends.components.Collision.CollisionData;
-
-import java.awt.*;
+import com.zackwantsfriends.components.collision.CollisionData;
 
 public class TextureComponent extends AbstractComponent {
 

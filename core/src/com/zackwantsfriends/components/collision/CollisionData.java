@@ -1,14 +1,6 @@
-package com.zackwantsfriends.components.Collision;
+package com.zackwantsfriends.components.collision;
 
 public class CollisionData {
-
-    public CollisionComponent getOtherCollider() {
-        return otherCollider;
-    }
-
-    public CollisionSide getCollisionSide() {
-        return collisionSide;
-    }
 
     private CollisionComponent otherCollider;
     private CollisionSide collisionSide;
@@ -16,5 +8,13 @@ public class CollisionData {
     public CollisionData(CollisionComponent otherCollider, CollisionSide collisionSide) {
         this.otherCollider = otherCollider;
         this.collisionSide = collisionSide;
+    }
+
+    public CollisionComponent getOtherCollider() {
+        return otherCollider;
+    }
+
+    public CollisionSide getCollisionSide() {
+        return collisionSide;
     }
 }
