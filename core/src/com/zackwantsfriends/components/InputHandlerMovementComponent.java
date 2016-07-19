@@ -6,16 +6,29 @@ import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.InputProcessor;
 
 public class InputHandlerMovementComponent extends AbstractComponent implements InputProcessor {
+    private AnimationComponent animationComponent;
+
     private float movementVector;
 
     @Override
     public void initialize() {
         ((InputMultiplexer) Gdx.input.getInputProcessor()).addProcessor(this);
+        animationComponent = getGameObject().getComponent(AnimationComponent.class);
     }
 
     @Override
     public void update(float deltaTime) {
-        getGameObject().moveBy(movementVector * 0.7f, 0);
+        getGameObject().moveBy(movementVector * 0.4f, 0);
+
+        if (movementVector < 0) {
+            animationComponent.setState(AnimationComponent.AnimationState.WALKING);
+            animationComponent.setFlip(true);
+        } else if (movementVector > 0) {
+            animationComponent.setState(AnimationComponent.AnimationState.WALKING);
+            animationComponent.setFlip(false);
+        } else {
+            animationComponent.setState(AnimationComponent.AnimationState.IDLE);
+        }
     }
 
     public float getMovementVector() {
