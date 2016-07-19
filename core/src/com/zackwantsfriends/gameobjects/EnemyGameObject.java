@@ -7,10 +7,10 @@ import com.zackwantsfriends.components.collision.CollisionType;
 
 public class EnemyGameObject extends AbstractGameObject {
 
-    public EnemyGameObject() {
+    public EnemyGameObject(float x, float y) {
         super();
         setName("ENEMY");
-        setPosition(200, 0);
+        setPosition(x, y);
         setSize(32, 32);
         setOrigin(16, 16);
 

@@ -26,12 +26,14 @@ public class GameScreen extends AbstractScreen {
                 float x = ((RectangleMapObject) object).getRectangle().getX();
                 float y = ((RectangleMapObject) object).getRectangle().getY();
                 addActor(new PlayerGameObject(x, y));
+            } else if (object.getName().equals("enemy_spawn")) {
+                float x = ((RectangleMapObject) object).getRectangle().getX();
+                float y = ((RectangleMapObject) object).getRectangle().getY();
+                addActor(new EnemyGameObject(x, y));
             } else if (object.getName().equals("tile_collision")) {
                 addActor(new TileCollisionObject(((RectangleMapObject) object).getRectangle()));
             }
         }
-
-        this.addActor(new EnemyGameObject());
 
     }
 

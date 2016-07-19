@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import java.util.Map;
 
 public class AnimationComponent extends AbstractComponent {
-    private InputHandlerMovementComponent inputHandlerMovementComponent;
+    private InputHandlerComponent inputHandlerComponent;
 
     private Map<AnimationState, Animation> animationMap;
     private AnimationState currentState;

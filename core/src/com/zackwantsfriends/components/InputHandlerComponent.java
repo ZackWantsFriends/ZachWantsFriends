@@ -4,26 +4,34 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.math.Vector2;
 
-public class InputHandlerMovementComponent extends AbstractComponent implements InputProcessor {
+public class InputHandlerComponent extends AbstractComponent implements InputProcessor {
     private AnimationComponent animationComponent;
+    private PhysicsComponent physicsComponent;
 
-    private float movementVector;
+    private Vector2 movementVector;
+
+    public InputHandlerComponent() {
+        movementVector = new Vector2();
+    }
 
     @Override
     public void initialize() {
         ((InputMultiplexer) Gdx.input.getInputProcessor()).addProcessor(this);
         animationComponent = getGameObject().getComponent(AnimationComponent.class);
+        physicsComponent = getGameObject().getComponent(PhysicsComponent.class);
     }
 
     @Override
     public void update(float deltaTime) {
-        getGameObject().moveBy(movementVector * 0.4f, 0);
+        physicsComponent.addForce(movementVector.x, 0);
+        if (physicsComponent.onGround) physicsComponent.addForce(0, movementVector.y);
 
-        if (movementVector < 0) {
+        if (movementVector.x < 0) {
             animationComponent.setState(AnimationComponent.AnimationState.WALKING);
             animationComponent.setFlip(true);
-        } else if (movementVector > 0) {
+        } else if (movementVector.x > 0) {
             animationComponent.setState(AnimationComponent.AnimationState.WALKING);
             animationComponent.setFlip(false);
         } else {
@@ -31,7 +39,7 @@ public class InputHandlerMovementComponent extends AbstractComponent implements 
         }
     }
 
-    public float getMovementVector() {
+    public Vector2 getMovementVector() {
         return movementVector;
     }
 
@@ -41,10 +49,13 @@ public class InputHandlerMovementComponent extends AbstractComponent implements 
     public boolean keyDown(int keycode) {
         switch (keycode) {
             case Input.Keys.LEFT:
-                movementVector--;
+                movementVector.x -= 2;
                 return true;
             case Input.Keys.RIGHT:
-                movementVector++;
+                movementVector.x += 2;
+                return true;
+            case Input.Keys.UP:
+                movementVector.y += 20;
                 return true;
             default:
                 return false;
@@ -55,10 +66,13 @@ public class InputHandlerMovementComponent extends AbstractComponent implements 
     public boolean keyUp(int keycode) {
         switch (keycode) {
             case Input.Keys.LEFT:
-                movementVector++;
+                movementVector.x += 2;
                 return true;
             case Input.Keys.RIGHT:
-                movementVector--;
+                movementVector.x -= 2;
+                return true;
+            case Input.Keys.UP:
+                movementVector.y -= 20;
                 return true;
             default:
                 return false;
