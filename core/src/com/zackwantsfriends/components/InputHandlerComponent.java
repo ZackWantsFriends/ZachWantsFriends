@@ -7,14 +7,37 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.math.Vector2;
 
 public class InputHandlerComponent extends AbstractComponent implements InputProcessor {
+
     private AnimationComponent animationComponent;
     private PhysicsComponent physicsComponent;
-
     private Vector2 movementVector;
+    private float movementSpeed;
+    private float jumpHeight;
 
     public InputHandlerComponent() {
         movementVector = new Vector2();
+
+        // default values
+        movementSpeed = 0.8f;
+        jumpHeight = 25;
     }
+
+    public float getMovementSpeed() {
+        return movementSpeed;
+    }
+
+    public void setMovementSpeed(float movementSpeed) {
+        this.movementSpeed = movementSpeed;
+    }
+
+    public float getJumpHeight() {
+        return jumpHeight;
+    }
+
+    public void setJumpHeight(float jumpHeight) {
+        this.jumpHeight = jumpHeight;
+    }
+
 
     @Override
     public void initialize() {
@@ -49,13 +72,13 @@ public class InputHandlerComponent extends AbstractComponent implements InputPro
     public boolean keyDown(int keycode) {
         switch (keycode) {
             case Input.Keys.LEFT:
-                movementVector.x -= 2;
+                movementVector.x -= movementSpeed;
                 return true;
             case Input.Keys.RIGHT:
-                movementVector.x += 2;
+                movementVector.x += movementSpeed;
                 return true;
             case Input.Keys.UP:
-                movementVector.y += 20;
+                movementVector.y += jumpHeight;
                 return true;
             default:
                 return false;
@@ -66,13 +89,13 @@ public class InputHandlerComponent extends AbstractComponent implements InputPro
     public boolean keyUp(int keycode) {
         switch (keycode) {
             case Input.Keys.LEFT:
-                movementVector.x += 2;
+                movementVector.x += movementSpeed;
                 return true;
             case Input.Keys.RIGHT:
-                movementVector.x -= 2;
+                movementVector.x -= movementSpeed;
                 return true;
             case Input.Keys.UP:
-                movementVector.y -= 20;
+                movementVector.y -= jumpHeight;
                 return true;
             default:
                 return false;
