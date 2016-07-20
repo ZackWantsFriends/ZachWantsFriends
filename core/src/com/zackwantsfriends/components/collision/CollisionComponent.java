@@ -7,7 +7,7 @@ import com.zackwantsfriends.components.AbstractComponent;
 public class CollisionComponent extends AbstractComponent {
     private CollisionType collisionType;
     private Rectangle bounds;
-    private Vector2 center;
+    private String tag;
 
     public CollisionComponent() {
         collisionType = CollisionType.DYNAMIC;
@@ -27,6 +27,14 @@ public class CollisionComponent extends AbstractComponent {
         return true;
     }
 
+    public String getTag() {
+        return tag;
+    }
+
+    public void setTag(String tag) {
+        this.tag = tag;
+    }
+    
     public Vector2 getBoundsCenter() {
         return new Vector2(bounds.getX() + (bounds.getWidth() / 2), bounds.getY() + (bounds).getHeight() / 2);
     }

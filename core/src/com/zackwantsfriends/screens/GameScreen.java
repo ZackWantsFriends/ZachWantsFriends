@@ -61,7 +61,7 @@ public class GameScreen extends AbstractScreen {
         super.draw();
 
         if (playerGameObject != null) {
-            getCamera().lookAt(playerGameObject.getX(), playerGameObject.getY(), getCamera().position.z);
+            //getCamera().lookAt(playerGameObject.getX(), playerGameObject.getY(), getCamera().position.z);
         }
 
         // debug renderer renders collision bounds
