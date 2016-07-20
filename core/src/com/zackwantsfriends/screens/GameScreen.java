@@ -1,7 +1,7 @@
 package com.zackwantsfriends.screens;
 
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
-import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -11,9 +11,7 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.utils.Array;
 import com.zackwantsfriends.TheGame;
 import com.zackwantsfriends.components.collision.CollisionComponent;
 import com.zackwantsfriends.gameobjects.AbstractGameObject;
@@ -51,6 +49,19 @@ public class GameScreen extends AbstractScreen {
             } else if (Objects.equals(object.getName(), "tile_collision")) {
                 addActor(new TileCollisionObject(((RectangleMapObject) object).getRectangle()));
             }
+        }
+    }
+
+    @Override
+    public boolean keyDown(int keyCode) {
+        switch (keyCode) {
+            case Input.Keys.ENTER:
+
+                MainMenuScreen menu = new MainMenuScreen();
+                TheGame.getInstance().setScreen(menu);
+                return true;
+            default:
+                return false;
         }
     }
 

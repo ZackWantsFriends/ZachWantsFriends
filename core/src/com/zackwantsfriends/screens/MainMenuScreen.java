@@ -1,6 +1,8 @@
 package com.zackwantsfriends.screens;
 
 
+import com.badlogic.gdx.Input;
+
 public class MainMenuScreen extends AbstractScreen {
 
     @Override
