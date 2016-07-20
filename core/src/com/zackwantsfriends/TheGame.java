@@ -11,6 +11,9 @@ public class TheGame extends Game {
 
     private static TheGame instance;
 
+    public static final int RESOLUTION_WIDTH = 640;
+    public static final int RESOLUTION_HEIGHT = 360;
+
     public TheGame() {
         instance = this;
     }
