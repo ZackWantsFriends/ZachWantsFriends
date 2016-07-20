@@ -14,7 +14,7 @@ public class AnimationDefs {
     public static void init() {
         playerAnimations = new HashMap<>();
         playerAnimations.put(AnimationComponent.AnimationState.IDLE,
-                new Animation(1.5f, new Array<>(TextureRegion.split(new Texture("zombie/idle_strip6.png"), 32, 32)[0]),
+                new Animation(3f, new Array<>(TextureRegion.split(new Texture("zombie/idle_strip6.png"), 32, 32)[0]),
                         Animation.PlayMode.LOOP));
         playerAnimations.put(AnimationComponent.AnimationState.WALKING,
                 new Animation(0.7f, new Array<>(TextureRegion.split(new Texture("zombie/walk_strip7.png"), 32, 32)[0]),
