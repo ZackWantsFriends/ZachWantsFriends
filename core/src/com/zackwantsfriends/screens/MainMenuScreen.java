@@ -1,8 +1,8 @@
 package com.zackwantsfriends.screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.math.Vector2;
 import com.zackwantsfriends.TheGame;
 
 public class MainMenuScreen extends AbstractScreen {
@@ -11,15 +11,38 @@ public class MainMenuScreen extends AbstractScreen {
     private Texture logoTexture;
     private float logoScale = 0.75f;
     private float logoOffsetY = 80;
+    private int selectedLabelIndex;
+
+    private String[] menuEntries;
+
 
     public MainMenuScreen() {
         backgroundTexture = new Texture(Gdx.files.internal("backgrounds.png"));
         logoTexture = new Texture(Gdx.files.internal("ui/logo.png"));
+        menuEntries = new String[3];
+        menuEntries[0] = "START GAME";
+        menuEntries[1] = "ABOUT";
+        menuEntries[2] = "EXIT";
+
     }
 
     @Override
     public void buildStage() {
 
+    }
+
+    @Override
+    public boolean keyDown(int keyCode) {
+        switch (keyCode) {
+            case Input.Keys.UP:
+                selectedLabelIndex--;
+                return true;
+            case Input.Keys.DOWN:
+                selectedLabelIndex++;
+                return true;
+            default:
+                return false;
+        }
     }
 
     @Override
