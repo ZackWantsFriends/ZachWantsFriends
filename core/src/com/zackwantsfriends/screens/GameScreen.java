@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.maps.MapObject;
+import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
@@ -26,11 +27,24 @@ public class GameScreen extends AbstractScreen {
     private ShapeRenderer debugRenderer;
     private PlayerGameObject playerGameObject;
 
+    private int mapPixelWidth;
+    private int mapPixelHeight;
+
     @Override
     public void buildStage() {
         TmxMapLoader tmxMapLoader = new TmxMapLoader(new InternalFileHandleResolver());
         TiledMap tiledMap = tmxMapLoader.load("level-3.tmx");
         tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap);
+
+        MapProperties prop = tiledMap.getProperties();
+
+        int mapWidth = prop.get("width", Integer.class);
+        int mapHeight = prop.get("height", Integer.class);
+        int tilePixelWidth = prop.get("tilewidth", Integer.class);
+        int tilePixelHeight = prop.get("tileheight", Integer.class);
+
+        mapPixelWidth = mapWidth * tilePixelWidth;
+        mapPixelHeight = mapHeight * tilePixelHeight;
 
         debugRenderer = new ShapeRenderer();
         debugRenderer.setProjectionMatrix(getCamera().combined);
@@ -73,6 +87,18 @@ public class GameScreen extends AbstractScreen {
 
         if (playerGameObject != null) {
             getCamera().position.set(playerGameObject.getX(), playerGameObject.getY(), 0);
+            if((getCamera().position.x - getCamera().viewportWidth / 2) < 0) {
+                getCamera().position.x = getCamera().viewportWidth / 2;
+            }
+            if((getCamera().position.x + getCamera().viewportWidth / 2) > mapPixelWidth) {
+                getCamera().position.x = mapPixelWidth - getCamera().viewportWidth / 2;
+            }
+            if((getCamera().position.y - getCamera().viewportHeight / 2) < 0) {
+                getCamera().position.y = getCamera().viewportHeight / 2;
+            }
+            if((getCamera().position.y + getCamera().viewportWidth / 2) > mapPixelHeight) {
+                getCamera().position.y = mapPixelHeight - getCamera().viewportWidth / 2;
+            }
         }
 
         // debug renderer renders collision bounds
