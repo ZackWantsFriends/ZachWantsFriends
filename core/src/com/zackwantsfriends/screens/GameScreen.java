@@ -58,7 +58,7 @@ public class GameScreen extends AbstractScreen {
         super.draw();
 
         // debug renderer renders collision bounds
-        if(TheGame.DEBUG) {
+        if (true) {
             debugRenderer.begin(ShapeRenderer.ShapeType.Line);
             debugRenderer.setColor(Color.RED);
             for (Actor actor : getActors()) {

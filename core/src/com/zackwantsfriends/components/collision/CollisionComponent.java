@@ -1,11 +1,13 @@
 package com.zackwantsfriends.components.collision;
 
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
 import com.zackwantsfriends.components.AbstractComponent;
 
 public class CollisionComponent extends AbstractComponent {
     private CollisionType collisionType;
     private Rectangle bounds;
+    private Vector2 center;
 
     public CollisionComponent() {
         collisionType = CollisionType.DYNAMIC;
@@ -23,6 +25,10 @@ public class CollisionComponent extends AbstractComponent {
         intersection.set(x, y, width, height);
 
         return true;
+    }
+
+    public Vector2 getBoundsCenter() {
+        return new Vector2(bounds.getX() + (bounds.getWidth() / 2), bounds.getY() + (bounds).getHeight() / 2);
     }
 
     @Override
