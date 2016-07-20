@@ -17,6 +17,8 @@ public class PhysicsComponent extends AbstractComponent {
         if (collisionData.getCollisionSide().equals(CollisionSide.BOTTOM)) {
             velY = 0;
             onGround = true;
+        } else if (collisionData.getCollisionSide().equals(CollisionSide.TOP)) {
+            velY = 0;
         }
     }
 

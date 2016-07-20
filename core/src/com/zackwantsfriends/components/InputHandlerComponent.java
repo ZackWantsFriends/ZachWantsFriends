@@ -60,6 +60,10 @@ public class InputHandlerComponent extends AbstractComponent implements InputPro
         } else {
             animationComponent.setState(AnimationComponent.AnimationState.IDLE);
         }
+
+        if(movementVector.y > 0) {
+            animationComponent.setState(AnimationComponent.AnimationState.JUMPING);
+        }
     }
 
     public Vector2 getMovementVector() {
