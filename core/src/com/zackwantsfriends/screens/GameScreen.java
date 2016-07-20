@@ -79,27 +79,31 @@ public class GameScreen extends AbstractScreen {
         }
     }
 
+    private void updateCamera() {
+        if (playerGameObject != null) {
+            getCamera().position.set(playerGameObject.getX(), playerGameObject.getY(), 0);
+            if ((getCamera().position.x - getCamera().viewportWidth / 2) < 0) {
+                getCamera().position.x = getCamera().viewportWidth / 2;
+            }
+            if ((getCamera().position.x + getCamera().viewportWidth / 2) > mapPixelWidth) {
+                getCamera().position.x = mapPixelWidth - getCamera().viewportWidth / 2;
+            }
+            if ((getCamera().position.y - getCamera().viewportHeight / 2) < 0) {
+                getCamera().position.y = getCamera().viewportHeight / 2;
+            }
+            if ((getCamera().position.y + getCamera().viewportWidth / 2) > mapPixelHeight) {
+                getCamera().position.y = mapPixelHeight - getCamera().viewportWidth / 2;
+            }
+        }
+    }
+
     @Override
     public void draw() {
         tiledMapRenderer.setView((OrthographicCamera) getCamera());
         tiledMapRenderer.render();
         super.draw();
 
-        if (playerGameObject != null) {
-            getCamera().position.set(playerGameObject.getX(), playerGameObject.getY(), 0);
-            if((getCamera().position.x - getCamera().viewportWidth / 2) < 0) {
-                getCamera().position.x = getCamera().viewportWidth / 2;
-            }
-            if((getCamera().position.x + getCamera().viewportWidth / 2) > mapPixelWidth) {
-                getCamera().position.x = mapPixelWidth - getCamera().viewportWidth / 2;
-            }
-            if((getCamera().position.y - getCamera().viewportHeight / 2) < 0) {
-                getCamera().position.y = getCamera().viewportHeight / 2;
-            }
-            if((getCamera().position.y + getCamera().viewportWidth / 2) > mapPixelHeight) {
-                getCamera().position.y = mapPixelHeight - getCamera().viewportWidth / 2;
-            }
-        }
+        updateCamera();
 
         // debug renderer renders collision bounds
         if (TheGame.DEBUG) {
