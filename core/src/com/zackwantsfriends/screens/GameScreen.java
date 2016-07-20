@@ -1,6 +1,7 @@
 package com.zackwantsfriends.screens;
 
 import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
+import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -10,6 +11,7 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.Array;
 import com.zackwantsfriends.TheGame;
@@ -24,6 +26,7 @@ import java.util.Objects;
 public class GameScreen extends AbstractScreen {
     private OrthogonalTiledMapRenderer tiledMapRenderer;
     private ShapeRenderer debugRenderer;
+    private PlayerGameObject playerGameObject;
 
     @Override
     public void buildStage() {
@@ -39,7 +42,8 @@ public class GameScreen extends AbstractScreen {
             if (Objects.equals(object.getName(), "player_spawn")) {
                 float x = ((RectangleMapObject) object).getRectangle().getX();
                 float y = ((RectangleMapObject) object).getRectangle().getY();
-                addActor(new PlayerGameObject(x, y));
+                playerGameObject = new PlayerGameObject(x, y);
+                addActor(playerGameObject);
             } else if (Objects.equals(object.getName(), "enemy_spawn")) {
                 float x = ((RectangleMapObject) object).getRectangle().getX();
                 float y = ((RectangleMapObject) object).getRectangle().getY();
@@ -48,7 +52,6 @@ public class GameScreen extends AbstractScreen {
                 addActor(new TileCollisionObject(((RectangleMapObject) object).getRectangle()));
             }
         }
-
     }
 
     @Override
@@ -56,6 +59,10 @@ public class GameScreen extends AbstractScreen {
         tiledMapRenderer.setView((OrthographicCamera) getCamera());
         tiledMapRenderer.render();
         super.draw();
+
+        if (playerGameObject != null) {
+            getCamera().lookAt(playerGameObject.getX(), playerGameObject.getY(), getCamera().position.z);
+        }
 
         // debug renderer renders collision bounds
         if (true) {
