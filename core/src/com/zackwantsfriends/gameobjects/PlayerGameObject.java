@@ -18,6 +18,7 @@ public class PlayerGameObject extends AbstractGameObject {
         AnimationComponent animationComponent = new AnimationComponent(AnimationDefs.playerAnimations, "standing", false);
         InputHandlerComponent inputHandlerComponent = new InputHandlerComponent();
         CollisionComponent collisionComponent = new CollisionComponent();
+        collisionComponent.setTag("PLAYER");
         collisionComponent.setCollisionType(CollisionType.DYNAMIC);
 
         // Add components to game object

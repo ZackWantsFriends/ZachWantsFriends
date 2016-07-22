@@ -17,6 +17,7 @@ public class EnemyGameObject extends AbstractGameObject {
         AnimationComponent animationComponent = new AnimationComponent(AnimationDefs.humanAnimations, "standing", false);
 
         CollisionComponent collisionComponent = new CollisionComponent();
+        collisionComponent.setTag("HUMAN");
         collisionComponent.setCollisionType(CollisionType.TRIGGER);
 
         // Add components to game object

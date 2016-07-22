@@ -9,9 +9,16 @@ public class PhysicsComponent extends AbstractComponent {
     final float MAX_VELX = 5f;
     final float MAX_VELY = 5f;
 
-    float velX;
-    float velY;
+    private AnimationComponent animationComponent;
+
+    private float velX;
+    private float velY;
     boolean onGround;
+
+    @Override
+    public void initialize() {
+        animationComponent = getGameObject().getComponent(AnimationComponent.class);
+    }
 
     @Override
     public void onCollision(CollisionData collisionData) {
@@ -33,7 +40,12 @@ public class PhysicsComponent extends AbstractComponent {
         velX *= 0.9;
         if (Math.abs(velX) < 0.1) velX = 0;
         getGameObject().moveBy(velX * deltaTime, velY * deltaTime);
-        if (velY > 0) onGround = false;
+        if (velY > 0) {
+            animationComponent.setState("jumping");
+            onGround = false;
+        } else if(velY < 0) {
+            animationComponent.setState("standing"); //TODO: change to "falling" when we have the animation for that
+        }
     }
 
     public void addForce(float x, float y) {
