@@ -10,6 +10,7 @@ import java.util.Map;
 
 public class AnimationDefs {
     public static Map<AnimationComponent.AnimationState, Animation> playerAnimations;
+    public static Map<AnimationComponent.AnimationState, Animation> humanAnimations;
 
     public static void init() {
         playerAnimations = new HashMap<>();
@@ -17,16 +18,27 @@ public class AnimationDefs {
                 new Animation(3f, new Array<>(TextureRegion.split(new Texture("zombie/idle_strip6.png"), 32, 32)[0]),
                         Animation.PlayMode.LOOP));
         playerAnimations.put(AnimationComponent.AnimationState.WALKING,
-                new Animation(2f, new Array<>(TextureRegion.split(new Texture("zombie/walk_strip7.png"), 32, 32)[0]),
+                new Animation(2f, new Array<>(TextureRegion.split(new Texture("zombie/walk2_strip7.png"), 32, 32)[0]),
                         Animation.PlayMode.LOOP));
         playerAnimations.put(AnimationComponent.AnimationState.DYING,
                 new Animation(0.7f, new Array<>(TextureRegion.split(new Texture("zombie/death_front_strip5.png"), 32, 32)[0]),
                         Animation.PlayMode.NORMAL));
         playerAnimations.put(AnimationComponent.AnimationState.HUGGING,
-                new Animation(0.7f, new Array<>(TextureRegion.split(new Texture("zombie/hug_strip5.png"), 32, 32)[0]),
+                new Animation(0.7f, new Array<>(TextureRegion.split(new Texture("zombie/hug2_strip5.png"), 32, 32)[0]),
                         Animation.PlayMode.NORMAL));
         playerAnimations.put(AnimationComponent.AnimationState.JUMPING,
                 new Animation(0.7f, new Array<>(TextureRegion.split(new Texture("zombie/jump_strip3.png"), 32, 32)[0]),
+                        Animation.PlayMode.NORMAL));
+
+        humanAnimations = new HashMap<>();
+        humanAnimations.put(AnimationComponent.AnimationState.IDLE,
+                new Animation(3f, new Array<>(TextureRegion.split(new Texture("human/h_stand.png"), 32, 32)[0]),
+                        Animation.PlayMode.LOOP));
+        humanAnimations.put(AnimationComponent.AnimationState.WALKING,
+                new Animation(2f, new Array<>(TextureRegion.split(new Texture("human/h_walk_strip4.png"), 32, 32)[0]),
+                        Animation.PlayMode.LOOP));
+        humanAnimations.put(AnimationComponent.AnimationState.HUGGING,
+                new Animation(2f, new Array<>(TextureRegion.split(new Texture("human/h_hugged_strip4.png"), 32, 32)[0]),
                         Animation.PlayMode.NORMAL));
     }
 }

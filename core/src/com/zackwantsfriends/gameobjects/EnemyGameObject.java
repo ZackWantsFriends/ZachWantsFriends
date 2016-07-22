@@ -14,7 +14,7 @@ public class EnemyGameObject extends AbstractGameObject {
         setSize(32, 32);
         setOrigin(16, 16);
 
-        AnimationComponent animationComponent = new AnimationComponent(AnimationDefs.playerAnimations, AnimationComponent.AnimationState.IDLE, false);
+        AnimationComponent animationComponent = new AnimationComponent(AnimationDefs.humanAnimations, AnimationComponent.AnimationState.IDLE, false);
 
         CollisionComponent collisionComponent = new CollisionComponent();
         collisionComponent.setCollisionType(CollisionType.TRIGGER);
