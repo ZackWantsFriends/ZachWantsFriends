@@ -1,7 +1,6 @@
 package com.zackwantsfriends.components.collision;
 
 public class CollisionData {
-
     private CollisionComponent otherCollider;
     private CollisionSide collisionSide;
 

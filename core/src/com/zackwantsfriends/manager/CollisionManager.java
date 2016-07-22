@@ -64,67 +64,58 @@ public class CollisionManager {
                         // gets the type of the collider
                         CollisionType collisionType = nextCollider.getCollisionType();
 
-                        if (wy > hx) {
-                            // Collision with the Bottom-Side
-                            if (wy > -hx) {
-                                switch (collisionType) {
-                                    case DYNAMIC:
-                                        //nextCollider.getGameObject().moveBy(0, -intersection.getHeight());
-                                        break;
-                                    case STATIC:
-                                        currentCollider.getGameObject().moveBy(0, intersection.getHeight());
-                                        break;
-                                    case TRIGGER:
-                                        // do nothing
-                                        break;
+                        if(!(currentCollider.getCollisionType().equals(CollisionType.TRIGGER) ||
+                                nextCollider.getCollisionType().equals(CollisionType.TRIGGER))) {
+                            if (wy > hx) {
+                                // Collision with the Bottom-Side
+                                if (wy > -hx) {
+                                    switch (collisionType) {
+                                        case DYNAMIC:
+                                            //nextCollider.getGameObject().moveBy(0, -intersection.getHeight());
+                                            break;
+                                        case STATIC:
+                                            currentCollider.getGameObject().moveBy(0, intersection.getHeight());
+                                            break;
+                                    }
+                                    collisionSide = CollisionSide.BOTTOM;
                                 }
-                                collisionSide = CollisionSide.BOTTOM;
-                            }
-                            // Collision with the Left-Side
-                            else {
-                                switch (collisionType) {
-                                    case DYNAMIC:
-                                        nextCollider.getGameObject().moveBy(intersection.getWidth(), 0);
-                                        break;
-                                    case STATIC:
-                                        currentCollider.getGameObject().moveBy(-intersection.getWidth(), 0);
-                                        break;
-                                    case TRIGGER:
-                                        // do nothing
-                                        break;
+                                // Collision with the Left-Side
+                                else {
+                                    switch (collisionType) {
+                                        case DYNAMIC:
+                                            nextCollider.getGameObject().moveBy(intersection.getWidth(), 0);
+                                            break;
+                                        case STATIC:
+                                            currentCollider.getGameObject().moveBy(-intersection.getWidth(), 0);
+                                            break;
+                                    }
+                                    collisionSide = CollisionSide.LEFT;
                                 }
-                                collisionSide = CollisionSide.LEFT;
-                            }
-                        } else {
-                            // Collision with the Right-Side
-                            if (wy > -hx) {
-                                switch (collisionType) {
-                                    case DYNAMIC:
-                                        nextCollider.getGameObject().moveBy(-intersection.getWidth(), 0);
-                                        break;
-                                    case STATIC:
-                                        currentCollider.getGameObject().moveBy(intersection.getWidth(), 0);
-                                        break;
-                                    case TRIGGER:
-                                        // do nothing
-                                        break;
+                            } else {
+                                // Collision with the Right-Side
+                                if (wy > -hx) {
+                                    switch (collisionType) {
+                                        case DYNAMIC:
+                                            nextCollider.getGameObject().moveBy(-intersection.getWidth(), 0);
+                                            break;
+                                        case STATIC:
+                                            currentCollider.getGameObject().moveBy(intersection.getWidth(), 0);
+                                            break;
+                                    }
+                                    collisionSide = CollisionSide.RIGHT;
                                 }
-                                collisionSide = CollisionSide.RIGHT;
-                            }
-                            // Collision with the Top-Side
-                            else {
-                                switch (collisionType) {
-                                    case DYNAMIC:
-                                        nextCollider.getGameObject().moveBy(0, intersection.getHeight());
-                                        break;
-                                    case STATIC:
-                                        currentCollider.getGameObject().moveBy(0, -intersection.getHeight());
-                                        break;
-                                    case TRIGGER:
-                                        // do nothing
-                                        break;
+                                // Collision with the Top-Side
+                                else {
+                                    switch (collisionType) {
+                                        case DYNAMIC:
+                                            nextCollider.getGameObject().moveBy(0, intersection.getHeight());
+                                            break;
+                                        case STATIC:
+                                            currentCollider.getGameObject().moveBy(0, -intersection.getHeight());
+                                            break;
+                                    }
+                                    collisionSide = CollisionSide.TOP;
                                 }
-                                collisionSide = CollisionSide.TOP;
                             }
                         }
 

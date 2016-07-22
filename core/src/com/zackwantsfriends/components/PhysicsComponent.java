@@ -2,6 +2,7 @@ package com.zackwantsfriends.components;
 
 import com.zackwantsfriends.components.collision.CollisionData;
 import com.zackwantsfriends.components.collision.CollisionSide;
+import com.zackwantsfriends.components.collision.CollisionType;
 
 public class PhysicsComponent extends AbstractComponent {
     final float GRAVITY = -0.1f;
@@ -14,6 +15,10 @@ public class PhysicsComponent extends AbstractComponent {
 
     @Override
     public void onCollision(CollisionData collisionData) {
+        if(collisionData.getOtherCollider().getCollisionType().equals(CollisionType.TRIGGER)) {
+            return;
+        }
+
         if (collisionData.getCollisionSide().equals(CollisionSide.BOTTOM)) {
             velY = 0;
             onGround = true;

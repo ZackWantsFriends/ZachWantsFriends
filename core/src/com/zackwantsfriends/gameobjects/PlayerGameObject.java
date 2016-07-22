@@ -15,7 +15,7 @@ public class PlayerGameObject extends AbstractGameObject {
         setSize(32, 32);
         setOrigin(16, 16);
 
-        AnimationComponent animationComponent = new AnimationComponent(AnimationDefs.playerAnimations, AnimationComponent.AnimationState.IDLE, false);
+        AnimationComponent animationComponent = new AnimationComponent(AnimationDefs.playerAnimations, "standing", false);
         InputHandlerComponent inputHandlerComponent = new InputHandlerComponent();
         CollisionComponent collisionComponent = new CollisionComponent();
         collisionComponent.setCollisionType(CollisionType.DYNAMIC);

@@ -6,8 +6,8 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import java.util.Map;
 
 public class AnimationComponent extends AbstractComponent {
-    private Map<AnimationState, Animation> animationMap;
-    private AnimationState currentState;
+    private Map<String, Animation> animationMap;
+    private String currentState;
     private Animation currentAnimation;
     private float stateTime;
     private boolean flip;
@@ -17,7 +17,7 @@ public class AnimationComponent extends AbstractComponent {
      * @param state        initial animation
      * @param flip         initial flipped state
      */
-    public AnimationComponent(Map<AnimationState, Animation> animationMap, AnimationState state, boolean flip) {
+    public AnimationComponent(Map<String, Animation> animationMap, String state, boolean flip) {
         this.animationMap = animationMap;
         this.currentState = state;
         this.currentAnimation = animationMap.get(state);
@@ -38,7 +38,7 @@ public class AnimationComponent extends AbstractComponent {
                 getGameObject().getScaleX() * (flip ? -1 : 1), getGameObject().getScaleY(), getGameObject().getRotation());
     }
 
-    public void setState(AnimationState state) {
+    public void setState(String state) {
         if (state.equals(currentState)) return;
         this.currentAnimation = animationMap.get(state);
         this.currentState = state;
@@ -51,13 +51,5 @@ public class AnimationComponent extends AbstractComponent {
 
     public void flip() {
         flip = !flip;
-    }
-
-    public enum AnimationState {
-        IDLE,
-        WALKING,
-        DYING,
-        JUMPING,
-        HUGGING
     }
 }

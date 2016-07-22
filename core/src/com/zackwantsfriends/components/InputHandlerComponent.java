@@ -52,17 +52,17 @@ public class InputHandlerComponent extends AbstractComponent implements InputPro
         if (physicsComponent.onGround) physicsComponent.addForce(0, movementVector.y);
 
         if (movementVector.x < 0) {
-            animationComponent.setState(AnimationComponent.AnimationState.WALKING);
+            animationComponent.setState("walking");
             animationComponent.setFlip(true);
         } else if (movementVector.x > 0) {
-            animationComponent.setState(AnimationComponent.AnimationState.WALKING);
+            animationComponent.setState("walking");
             animationComponent.setFlip(false);
         } else {
-            animationComponent.setState(AnimationComponent.AnimationState.IDLE);
+            animationComponent.setState("standing");
         }
 
         if(movementVector.y > 0) {
-            animationComponent.setState(AnimationComponent.AnimationState.JUMPING);
+            animationComponent.setState("jumping");
         }
     }
 
